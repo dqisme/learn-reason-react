@@ -10,6 +10,9 @@ echo '{
 
 echo 'node_modules/
 lib/
-.merlin' > .gitignore
+.merlin
+.bsb.lock' > .gitignore
 
 mkdir src
+
+echo 'Js.log("hello world")' > src/index.res

@@ -39,6 +39,12 @@ npm install --save reason-react
 node_modules/
 lib/
 .merlin
+.bsb.lock
 ```
 
 6. Add source codes
+
+  - `src/index.res`
+  ```rescript
+  Js.log("hello world")
+  ```
