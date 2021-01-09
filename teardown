@@ -1,0 +1,2 @@
+rm -rf node_modules/ src/ lib/
+rm -f package.json package-lock.json bsconfig.json .gitignore .merlin

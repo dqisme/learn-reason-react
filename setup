@@ -1,0 +1,15 @@
+npm init --yes
+
+npm install --save-dev bs-platform
+npm install --save reason-react
+
+echo '{
+    "name": "learn-reason-react",
+    "sources": "src"
+}' > bsconfig.json
+
+echo 'node_modules/
+lib/
+.merlin' > .gitignore
+
+mkdir src
