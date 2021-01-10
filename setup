@@ -1,7 +1,14 @@
+# Steps for ReScript environment
+
 npm init --yes
 
 npm install --save-dev bs-platform
-npm install --save reason-react
+
+jq '."scripts"={
+  "build:src": "bsb",
+  "build": "bsb -make-world",
+  "clean": "bsb -clean-world"
+}' package.json > package.json.tmp && mv -f package.json.tmp package.json
 
 echo '{
     "name": "learn-reason-react",
@@ -14,5 +21,24 @@ lib/
 .bsb.lock' > .gitignore
 
 mkdir src
+echo 'Js.log("hello world")' > src/Index.res
 
-echo 'Js.log("hello world")' > src/index.res
+# Steps for React
+
+npm install --save react react-dom reason-react
+
+jq '."bs-dependencies"=["reason-react"]' bsconfig.json > bsconfig.json.tmp && mv -f bsconfig.json.tmp bsconfig.json
+
+echo 'switch ReactDOM.querySelector("#root") {
+| Some(root) => ReactDOM.render(React.string("hello world"), root)
+| None => ()
+}' > src/Index.res
+
+# Steps for JSX
+
+jq '."reason"={"react-jsx": 3}' bsconfig.json > bsconfig.json.tmp && mv -f bsconfig.json.tmp bsconfig.json
+
+echo 'switch ReactDOM.querySelector("#root") {
+| Some(root) => ReactDOM.render(<p>{React.string("hello world")}</p>, root)
+| None => ()
+}' > src/Index.res
