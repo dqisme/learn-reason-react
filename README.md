@@ -9,6 +9,7 @@ Steps:
 - ReScript environment
 - React
 - JSX
+- Subcomponent
 
 ### Steps for ReScript environment
 
@@ -28,13 +29,16 @@ npm install --save-dev bs-platform
 
 ```json
 {
-  "build:src": "bsb",
-  "build": "bsb -make-world",
-  "clean": "bsb -clean-world"
+  // ...
+  "scripts": {
+    "build:src": "bsb",
+    "build": "bsb -make-world",
+    "clean": "bsb -clean-world"
+  }
 }
 ```
 
-4. Add `bsconfig.json`
+4. Add `bsconfig.json` with name as the same one in `package.json`
 
 ```json
 {
@@ -106,3 +110,33 @@ switch ReactDOM.querySelector("#root") {
 | None => ()
 }
 ```
+
+### Steps for subcomponent
+
+12. Change sources configuration in `bsconfig.json` to involve all subdirectories
+
+```json
+{
+  // ...
+  "sources": [{
+    "dir": "src",
+    "subdirs": true
+  }]
+}
+```
+
+13. Extract a subcomponent
+
+  - `src/Index.res`
+  ```rescript
+  switch ReactDOM.querySelector("#root") {
+  | Some(root) => ReactDOM.render(<Greeting />, root)
+  | None => ()
+  }
+  ```
+
+  - `src/components/Greeting.res`
+  ```rescript
+  @react.component
+  let make = () => <p>{React.string("hello world")}</p>
+  ```

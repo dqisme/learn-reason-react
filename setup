@@ -42,3 +42,18 @@ echo 'switch ReactDOM.querySelector("#root") {
 | Some(root) => ReactDOM.render(<p>{React.string("hello world")}</p>, root)
 | None => ()
 }' > src/Index.res
+
+# Steps for subcomponent
+
+jq '."sources"=[{
+  "dir": "src",
+  "subdirs": true
+}]' bsconfig.json > bsconfig.json.tmp && mv -f bsconfig.json.tmp bsconfig.json
+
+mkdir -p src/components
+echo '@react.component
+let make = () => <p>{React.string("hello world")}</p>' > src/components/Greeting.res
+echo 'switch ReactDOM.querySelector("#root") {
+| Some(root) => ReactDOM.render(<Greeting />, root)
+| None => ()
+}' > src/Index.res
