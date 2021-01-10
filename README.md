@@ -1,8 +1,11 @@
 # learn-reason-react
 
-## Setup
+## Prerequisite
 
-Steps:
+- NodeJS
+- [jq](https://stedolan.github.io/jq/)
+
+## Steps
 
 > For every step, you can check the bundle under `lib/js/src/index.js` after running `npm run build`.
 
